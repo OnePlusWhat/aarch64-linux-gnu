@@ -5325,6 +5325,7 @@ struct GTY(()) cl_optimization
   unsigned char x_optimize;
   unsigned char x_optimize_size;
   unsigned char x_optimize_debug;
+  unsigned char x_optimize_fast;
   signed char x_flag_aggressive_loop_optimizations;
   signed char x_flag_align_functions;
   signed char x_flag_align_jumps;

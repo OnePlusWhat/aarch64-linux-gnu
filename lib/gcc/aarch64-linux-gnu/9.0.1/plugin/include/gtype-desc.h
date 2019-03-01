@@ -877,10 +877,10 @@ extern void gt_ggc_mx_vec_condition_va_gc_ (void *);
   if (X != NULL) gt_ggc_mx_vec_size_time_entry_va_gc_ (X);\
   } while (0)
 extern void gt_ggc_mx_vec_size_time_entry_va_gc_ (void *);
-#define gt_ggc_m_33function_summary_ipa_fn_summary__(X) do { \
-  if (X != NULL) gt_ggc_mx_function_summary_ipa_fn_summary__ (X);\
+#define gt_ggc_m_44fast_function_summary_ipa_fn_summary__va_gc_(X) do { \
+  if (X != NULL) gt_ggc_mx_fast_function_summary_ipa_fn_summary__va_gc_ (X);\
   } while (0)
-extern void gt_ggc_mx_function_summary_ipa_fn_summary__ (void *);
+extern void gt_ggc_mx_fast_function_summary_ipa_fn_summary__va_gc_ (void *);
 #define gt_ggc_m_13tree_type_map(X) do { \
   if (X != NULL) gt_ggc_mx_tree_type_map (X);\
   } while (0)
@@ -2150,10 +2150,10 @@ extern void gt_pch_nx_vec_condition_va_gc_ (void *);
   if (X != NULL) gt_pch_nx_vec_size_time_entry_va_gc_ (X);\
   } while (0)
 extern void gt_pch_nx_vec_size_time_entry_va_gc_ (void *);
-#define gt_pch_n_33function_summary_ipa_fn_summary__(X) do { \
-  if (X != NULL) gt_pch_nx_function_summary_ipa_fn_summary__ (X);\
+#define gt_pch_n_44fast_function_summary_ipa_fn_summary__va_gc_(X) do { \
+  if (X != NULL) gt_pch_nx_fast_function_summary_ipa_fn_summary__va_gc_ (X);\
   } while (0)
-extern void gt_pch_nx_function_summary_ipa_fn_summary__ (void *);
+extern void gt_pch_nx_fast_function_summary_ipa_fn_summary__va_gc_ (void *);
 #define gt_pch_n_13tree_type_map(X) do { \
   if (X != NULL) gt_pch_nx_tree_type_map (X);\
   } while (0)
@@ -3111,7 +3111,7 @@ extern void gt_pch_p_20vec_condition_va_gc_
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_26vec_size_time_entry_va_gc_
     (void *, void *, gt_pointer_operator, void *);
-extern void gt_pch_p_33function_summary_ipa_fn_summary__
+extern void gt_pch_p_44fast_function_summary_ipa_fn_summary__va_gc_
     (void *, void *, gt_pointer_operator, void *);
 extern void gt_pch_p_13tree_type_map
     (void *, void *, gt_pointer_operator, void *);

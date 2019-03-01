@@ -24,6 +24,7 @@ extern int ordered_comparison_operator (rtx, machine_mode);
 extern int comparison_operator (rtx, machine_mode);
 extern int cc_register (rtx, machine_mode);
 extern int aarch64_call_insn_operand (rtx, machine_mode);
+extern int aarch64_general_reg (rtx, machine_mode);
 extern int const0_operand (rtx, machine_mode);
 extern int subreg_lowpart_operator (rtx, machine_mode);
 extern int aarch64_ccmp_immediate (rtx, machine_mode);

@@ -13,7 +13,6 @@
 #define HAVE_fccmpesf (TARGET_FLOAT)
 #define HAVE_fccmpedf (TARGET_FLOAT)
 #define HAVE_condjump 1
-#define HAVE_casesi_dispatch 1
 #define HAVE_nop 1
 #define HAVE_prefetch 1
 #define HAVE_trap 1
@@ -3897,6 +3896,7 @@
 #define HAVE_modsi3 1
 #define HAVE_moddi3 1
 #define HAVE_casesi 1
+#define HAVE_casesi_dispatch 1
 #define HAVE_prologue 1
 #define HAVE_epilogue 1
 #define HAVE_sibcall_epilogue 1
@@ -5517,7 +5517,6 @@ extern rtx        gen_fccmpdf                             (rtx, rtx, rtx, rtx, r
 extern rtx        gen_fccmpesf                            (rtx, rtx, rtx, rtx, rtx, rtx);
 extern rtx        gen_fccmpedf                            (rtx, rtx, rtx, rtx, rtx, rtx);
 extern rtx        gen_condjump                            (rtx, rtx, rtx);
-extern rtx        gen_casesi_dispatch                     (rtx, rtx, rtx);
 extern rtx        gen_nop                                 (void);
 extern rtx        gen_prefetch                            (rtx, rtx, rtx);
 extern rtx        gen_trap                                (void);
@@ -8604,6 +8603,7 @@ extern rtx        gen_cbranchcc4                          (rtx, rtx, rtx, rtx);
 extern rtx        gen_modsi3                              (rtx, rtx, rtx);
 extern rtx        gen_moddi3                              (rtx, rtx, rtx);
 extern rtx        gen_casesi                              (rtx, rtx, rtx, rtx, rtx);
+extern rtx        gen_casesi_dispatch                     (rtx, rtx);
 extern rtx        gen_prologue                            (void);
 extern rtx        gen_epilogue                            (void);
 extern rtx        gen_sibcall_epilogue                    (void);

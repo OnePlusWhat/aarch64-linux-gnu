@@ -2859,6 +2859,9 @@ directive": '#if', '#ifdef' or '#ifndef'.
 * Defined::
 * Else::
 * Elif::
+* __has_attribute::
+* __has_cpp_attribute::
+* __has_include::
 
 
 File: cpp.info,  Node: Ifdef,  Next: If,  Up: Conditional Syntax
@@ -3047,7 +3050,7 @@ TEXT-IF-FALSE is skipped.  If EXPRESSION is zero, the opposite happens.
    You can use '#else' with '#ifdef' and '#ifndef', too.
 
 
-File: cpp.info,  Node: Elif,  Prev: Else,  Up: Conditional Syntax
+File: cpp.info,  Node: Elif,  Next: __has_attribute,  Prev: Else,  Up: Conditional Syntax
 
 4.2.5 Elif
 ----------
@@ -3090,6 +3093,96 @@ within it have failed.
 
    '#else' is allowed after any number of '#elif' directives, but
 '#elif' may not follow '#else'.
+
+
+File: cpp.info,  Node: __has_attribute,  Next: __has_cpp_attribute,  Prev: Elif,  Up: Conditional Syntax
+
+4.2.6 '__has_attribute'
+-----------------------
+
+The special operator '__has_attribute (OPERAND)' may be used in '#if'
+and '#elif' expressions to test whether the attribute referenced by its
+OPERAND is recognized by GCC. Using the operator in other contexts is
+not valid.  In C code, OPERAND must be a valid identifier.  In C++ code,
+OPERAND may be optionally introduced by the 'ATTRIBUTE-SCOPE::' prefix.
+The ATTRIBUTE-SCOPE prefix identifies the "namespace" within which the
+attribute is recognized.  The scope of GCC attributes is 'gnu' or
+'__gnu__'.  The '__has_attribute' operator by itself, without any
+OPERAND or parentheses, acts as a predefined macro so that support for
+it can be tested in portable code.  Thus, the recommended use of the
+operator is as follows:
+
+     #if defined __has_attribute
+     #  if __has_attribute (nonnull)
+     #    define ATTR_NONNULL __attribute__ ((nonnull))
+     #  endif
+     #endif
+
+   The first '#if' test succeeds only when the operator is supported by
+the version of GCC (or another compiler) being used.  Only when that
+test succeeds is it valid to use '__has_attribute' as a preprocessor
+operator.  As a result, combining the two tests into a single expression
+as shown below would only be valid with a compiler that supports the
+operator but not with others that don't.
+
+     #if defined __has_attribute && __has_attribute (nonnull)   /* not portable */
+     ...
+     #endif
+
+
+File: cpp.info,  Node: __has_cpp_attribute,  Next: __has_include,  Prev: __has_attribute,  Up: Conditional Syntax
+
+4.2.7 '__has_cpp_attribute'
+---------------------------
+
+The special operator '__has_cpp_attribute (OPERAND)' may be used in
+'#if' and '#elif' expressions in C++ code to test whether the attribute
+referenced by its OPERAND is recognized by GCC. '__has_cpp_attribute
+(OPERAND)' is equivalent to '__has_attribute (OPERAND)' except that when
+OPERAND designates a supported standard attribute it evaluates to an
+integer constant of the form 'YYYYMM' indicating the year and month when
+the attribute was first introduced into the C++ standard.  For
+additional information including the dates of the introduction of
+current standard attributes, see
+SD-6: SG10 Feature Test Recommendations (https://isocpp.org/std/standing-documents/sd-6-sg10-feature-test-recommendations/).
+
+
+File: cpp.info,  Node: __has_include,  Prev: __has_cpp_attribute,  Up: Conditional Syntax
+
+4.2.8 '__has_include'
+---------------------
+
+The special operator '__has_include (OPERAND)' may be used in '#if' and
+'#elif' expressions to test whether the header referenced by its OPERAND
+can be included using the '#include' directive.  Using the operator in
+other contexts is not valid.  The OPERAND takes the same form as the
+file in the '#include' directive (*note Include Syntax::) and evaluates
+to a nonzero value if the header can be included and to zero otherwise.
+Note that that the ability to include a header doesn't imply that the
+header doesn't contain invalid constructs or '#error' directives that
+would cause the preprocessor to fail.
+
+   The '__has_include' operator by itself, without any OPERAND or
+parentheses, acts as a predefined macro so that support for it can be
+tested in portable code.  Thus, the recommended use of the operator is
+as follows:
+
+     #if defined __has_include
+     #  if __has_include (<stdatomic.h>)
+     #    include <stdatomic.h>
+     #  endif
+     #endif
+
+   The first '#if' test succeeds only when the operator is supported by
+the version of GCC (or another compiler) being used.  Only when that
+test succeeds is it valid to use '__has_include' as a preprocessor
+operator.  As a result, combining the two tests into a single expression
+as shown below would only be valid with a compiler that supports the
+operator but not with others that don't.
+
+     #if defined __has_include && __has_include ("header.h")   /* not portable */
+     ...
+     #endif
 
 
 File: cpp.info,  Node: Deleted Code,  Prev: Conditional Syntax,  Up: Conditionals
@@ -5209,6 +5302,9 @@ Concept Index
 * # operator:                            Stringizing.         (line   6)
 * ## operator:                           Concatenation.       (line   6)
 * _Pragma:                               Pragmas.             (line  13)
+* __has_attribute:                       __has_attribute.     (line   6)
+* __has_cpp_attribute:                   __has_cpp_attribute. (line   6)
+* __has_include:                         __has_include.       (line   6)
 * alternative tokens:                    Tokenization.        (line 101)
 * arguments:                             Macro Arguments.     (line   6)
 * arguments in macro definitions:        Macro Arguments.     (line   6)
@@ -5389,35 +5485,38 @@ Node: Newlines in Arguments112061
 Node: Conditionals113012
 Node: Conditional Uses114708
 Node: Conditional Syntax116066
-Node: Ifdef116386
-Node: If119543
-Node: Defined121847
-Node: Else123240
-Node: Elif123810
-Node: Deleted Code125099
-Node: Diagnostics126346
-Node: Line Control127895
-Node: Pragmas130173
-Node: Other Directives134570
-Node: Preprocessor Output135620
-Node: Traditional Mode138773
-Node: Traditional lexical analysis139910
-Node: Traditional macros142413
-Node: Traditional miscellany146210
-Node: Traditional warnings147206
-Node: Implementation Details149403
-Node: Implementation-defined behavior149966
-Ref: Identifier characters150716
-Node: Implementation limits153583
-Node: Obsolete Features156256
-Node: Invocation159100
-Ref: dashMF165135
-Ref: fdollars-in-identifiers169714
-Ref: Wtrigraphs183710
-Node: Environment Variables185765
-Node: GNU Free Documentation License189458
-Node: Index of Directives214603
-Node: Option Index216756
-Node: Concept Index222712
+Node: Ifdef116448
+Node: If119605
+Node: Defined121909
+Node: Else123302
+Node: Elif123872
+Node: __has_attribute125185
+Node: __has_cpp_attribute126719
+Node: __has_include127605
+Node: Deleted Code129198
+Node: Diagnostics130445
+Node: Line Control131994
+Node: Pragmas134272
+Node: Other Directives138669
+Node: Preprocessor Output139719
+Node: Traditional Mode142872
+Node: Traditional lexical analysis144009
+Node: Traditional macros146512
+Node: Traditional miscellany150309
+Node: Traditional warnings151305
+Node: Implementation Details153502
+Node: Implementation-defined behavior154065
+Ref: Identifier characters154815
+Node: Implementation limits157682
+Node: Obsolete Features160355
+Node: Invocation163199
+Ref: dashMF169234
+Ref: fdollars-in-identifiers173813
+Ref: Wtrigraphs187809
+Node: Environment Variables189864
+Node: GNU Free Documentation License193557
+Node: Index of Directives218702
+Node: Option Index220855
+Node: Concept Index226811
 
 End Tag Table
