@@ -129,7 +129,7 @@
 .\" ========================================================================
 .\"
 .IX Title "GCOV 1"
-.TH GCOV 1 "2019-02-28" "gcc-9.0.1" "GNU"
+.TH GCOV 1 "2019-03-08" "gcc-9.0.1" "GNU"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
@@ -602,8 +602,8 @@ are \fIexactly\fR 0% and 100% respectively.  Other values which would
 conventionally be rounded to 0% or 100% are instead printed as the
 nearest non-boundary value.
 .PP
-When using \fBgcov\fR, you must first compile your program with two
-special \s-1GCC\s0 options: \fB\-fprofile\-arcs \-ftest\-coverage\fR.
+When using \fBgcov\fR, you must first compile your program
+with a special \s-1GCC\s0 option \fB\-\-coverage\fR.
 This tells the compiler to generate additional information needed by
 gcov (basically a flow graph of the program) and also includes
 additional code in the object files for generating the extra profiling
@@ -620,7 +620,7 @@ for each line.  For example, if your program is called \fItmp.cpp\fR, this
 is what you see when you use the basic \fBgcov\fR facility:
 .PP
 .Vb 6
-\&        $ g++ \-fprofile\-arcs \-ftest\-coverage tmp.cpp
+\&        $ g++ \-\-coverage tmp.cpp
 \&        $ a.out
 \&        $ gcov tmp.cpp \-m
 \&        File \*(Aqtmp.cpp\*(Aq
@@ -915,8 +915,8 @@ new execution counts and finally writes the data to the file.
 .SS "Using \fBgcov\fP with \s-1GCC\s0 Optimization"
 .IX Subsection "Using gcov with GCC Optimization"
 If you plan to use \fBgcov\fR to help optimize your code, you must
-first compile your program with two special \s-1GCC\s0 options:
-\&\fB\-fprofile\-arcs \-ftest\-coverage\fR.  Aside from that, you can use any
+first compile your program with a special \s-1GCC\s0 option
+\&\fB\-\-coverage\fR.  Aside from that, you can use any
 other \s-1GCC\s0 options; but if you want to prove that every single line
 in your program was executed, you should not compile with optimization
 at the same time.  On some machines the optimizer can eliminate some
