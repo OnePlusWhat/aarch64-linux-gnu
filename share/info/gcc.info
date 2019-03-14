@@ -54310,6 +54310,7 @@ File: gcc.info,  Node: Invoking Gcov,  Next: Gcov and Optimization,  Prev: Gcov 
             "count": COUNT,
             "line_number": LINE_NUMBER,
             "unexecuted_block": UNEXECUTED_BLOCK
+            "function_name": FUNCTION_NAME,
           }
 
      Branches are present only with -B option.  Fields of the LINE
@@ -54321,6 +54322,9 @@ File: gcc.info,  Node: Invoking Gcov,  Next: Gcov and Optimization,  Prev: Gcov 
 
         * UNEXECUTED_BLOCK: flag whether the line contains an unexecuted
           block (not all statements on the line are executed)
+
+     FUNCTION_NAME: a name of a function this LINE belongs to (for a
+     line with an inlined statements can be not set)
 
      Each BRANCH has the following form:
 
@@ -65587,41 +65591,41 @@ Node: Compatibility2288952
 Node: Gcov2295508
 Node: Gcov Intro2296043
 Node: Invoking Gcov2298761
-Node: Gcov and Optimization2320716
-Node: Gcov Data Files2324459
-Node: Cross-profiling2325868
-Node: Gcov-tool2327722
-Node: Gcov-tool Intro2328147
-Node: Invoking Gcov-tool2330117
-Node: Gcov-dump2332695
-Node: Gcov-dump Intro2333017
-Node: Invoking Gcov-dump2333284
-Node: Trouble2333885
-Node: Actual Bugs2335303
-Node: Interoperation2335750
-Node: Incompatibilities2342641
-Node: Fixed Headers2350793
-Node: Standard Libraries2352451
-Node: Disappointments2353823
-Node: C++ Misunderstandings2358182
-Node: Static Definitions2358993
-Node: Name lookup2360046
-Ref: Name lookup-Footnote-12364827
-Node: Temporaries2365016
-Node: Copy Assignment2366992
-Node: Non-bugs2368799
-Node: Warnings and Errors2379305
-Node: Bugs2381067
-Node: Bug Criteria2381534
-Node: Bug Reporting2383744
-Node: Service2383962
-Node: Contributing2384782
-Node: Funding2385522
-Node: GNU Project2388012
-Node: Copying2388658
-Node: GNU Free Documentation License2426167
-Node: Contributors2451285
-Node: Option Index2492258
-Node: Keyword Index2755456
+Node: Gcov and Optimization2320883
+Node: Gcov Data Files2324626
+Node: Cross-profiling2326035
+Node: Gcov-tool2327889
+Node: Gcov-tool Intro2328314
+Node: Invoking Gcov-tool2330284
+Node: Gcov-dump2332862
+Node: Gcov-dump Intro2333184
+Node: Invoking Gcov-dump2333451
+Node: Trouble2334052
+Node: Actual Bugs2335470
+Node: Interoperation2335917
+Node: Incompatibilities2342808
+Node: Fixed Headers2350960
+Node: Standard Libraries2352618
+Node: Disappointments2353990
+Node: C++ Misunderstandings2358349
+Node: Static Definitions2359160
+Node: Name lookup2360213
+Ref: Name lookup-Footnote-12364994
+Node: Temporaries2365183
+Node: Copy Assignment2367159
+Node: Non-bugs2368966
+Node: Warnings and Errors2379472
+Node: Bugs2381234
+Node: Bug Criteria2381701
+Node: Bug Reporting2383911
+Node: Service2384129
+Node: Contributing2384949
+Node: Funding2385689
+Node: GNU Project2388179
+Node: Copying2388825
+Node: GNU Free Documentation License2426334
+Node: Contributors2451452
+Node: Option Index2492425
+Node: Keyword Index2755623
 
 End Tag Table
