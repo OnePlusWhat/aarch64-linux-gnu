@@ -2,4 +2,4 @@
    Use the shared library, but some functions are only in
    the static library, so try that secondarily.  */
 OUTPUT_FORMAT(elf64-littleaarch64)
-GROUP ( /root/gcc/aarch64-linux-gnu/aarch64-linux-gnu/lib/libc.so.6 /root/gcc/aarch64-linux-gnu/aarch64-linux-gnu/lib/libc_nonshared.a  AS_NEEDED ( /root/gcc/aarch64-linux-gnu/aarch64-linux-gnu/lib/ld-linux-aarch64.so.1 ) )
+GROUP ( /root/buildgcc/aarch64-linux-gnu/aarch64-linux-gnu/lib/libc.so.6 /root/buildgcc/aarch64-linux-gnu/aarch64-linux-gnu/lib/libc_nonshared.a  AS_NEEDED ( /root/buildgcc/aarch64-linux-gnu/aarch64-linux-gnu/lib/ld-linux-aarch64.so.1 ) )

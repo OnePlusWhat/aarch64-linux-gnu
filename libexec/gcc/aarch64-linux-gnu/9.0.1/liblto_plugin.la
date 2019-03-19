@@ -38,4 +38,4 @@ dlopen=''
 dlpreopen=''
 
 # Directory that this library needs to be installed in:
-libdir='/root/gcc/aarch64-linux-gnu/libexec/gcc/aarch64-linux-gnu/9.0.1'
+libdir='/root/buildgcc/aarch64-linux-gnu/libexec/gcc/aarch64-linux-gnu/9.0.1'

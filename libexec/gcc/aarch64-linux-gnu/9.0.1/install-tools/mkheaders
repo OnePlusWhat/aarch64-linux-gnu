@@ -53,7 +53,7 @@ if [ x$1 != x ] ; then
   prefix=$1
   shift
 else
-  prefix=/root/gcc/aarch64-linux-gnu
+  prefix=/root/buildgcc/aarch64-linux-gnu
 fi
 
 # Allow for alternate isysroot in which to find headers

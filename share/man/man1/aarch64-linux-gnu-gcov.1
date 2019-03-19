@@ -129,7 +129,7 @@
 .\" ========================================================================
 .\"
 .IX Title "GCOV 1"
-.TH GCOV 1 "2019-03-14" "gcc-9.0.1" "GNU"
+.TH GCOV 1 "2019-03-19" "gcc-9.0.1" "GNU"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
@@ -317,14 +317,16 @@ Fields of the \fIfile\fR element have following semantics:
 .Sp
 Each \fIfunction\fR has the following form:
 .Sp
-.Vb 9
+.Vb 11
 \&        {
 \&          "blocks": <blocks>,
 \&          "blocks_executed": <blocks_executed>,
 \&          "demangled_name": "<demangled_name>,
+\&          "end_column": <end_column>,
 \&          "end_line": <end_line>,
 \&          "execution_count": <execution_count>,
 \&          "name": <name>,
+\&          "start_column": <start_column>
 \&          "start_line": <start_line>
 \&        }
 .Ve
@@ -337,15 +339,24 @@ Fields of the \fIfunction\fR element have following semantics:
 .IP "*" 4
 \&\fIdemangled_name\fR: demangled name of the function
 .IP "*" 4
+\&\fIend_column\fR: column in the source file where the function ends
+.IP "*" 4
 \&\fIend_line\fR: line in the source file where the function ends
 .IP "*" 4
 \&\fIexecution_count\fR: number of executions of the function
 .IP "*" 4
 \&\fIname\fR: name of the function
 .IP "*" 4
+\&\fIstart_column\fR: column in the source file where the function begins
+.IP "*" 4
 \&\fIstart_line\fR: line in the source file where the function begins
 .RE
 .RS 4
+.Sp
+Note that line numbers and column numbers number from 1.  In the current
+implementation, \fIstart_line\fR and \fIstart_column\fR do not include
+any template parameters and the leading return type but that
+this is likely to be fixed in the future.
 .Sp
 Each \fIline\fR has the following form:
 .Sp
@@ -368,13 +379,11 @@ Fields of the \fIline\fR element have following semantics:
 .IP "*" 4
 \&\fIunexecuted_block\fR: flag whether the line contains an unexecuted block
 (not all statements on the line are executed)
-.RE
-.RS 4
-.RE
-.IP "B" 4
-.IX Item "B"
+.IP "*" 4
 \&\fIfunction_name\fR: a name of a function this \fIline\fR belongs to
 (for a line with an inlined statements can be not set)
+.RE
+.RS 4
 .Sp
 Each \fIbranch\fR has the following form:
 .Sp
@@ -387,7 +396,6 @@ Each \fIbranch\fR has the following form:
 .Ve
 .Sp
 Fields of the \fIbranch\fR element have following semantics:
-.RS 4
 .IP "*" 4
 \&\fIcount\fR: number of executions of the branch
 .IP "*" 4
@@ -397,32 +405,26 @@ Fields of the \fIbranch\fR element have following semantics:
 .RE
 .RS 4
 .RE
-.ie n .IP """\-j""" 4
-.el .IP "\f(CW\-j\fR" 4
+.IP "\fB\-j\fR" 4
 .IX Item "-j"
 .PD 0
-.ie n .IP """\-\-human\-readable""" 4
-.el .IP "\f(CW\-\-human\-readable\fR" 4
+.IP "\fB\-\-human\-readable\fR" 4
 .IX Item "--human-readable"
 .PD
 Write counts in human readable format (like 24.6k).
-.ie n .IP """\-k""" 4
-.el .IP "\f(CW\-k\fR" 4
+.IP "\fB\-k\fR" 4
 .IX Item "-k"
 .PD 0
-.ie n .IP """\-\-use\-colors""" 4
-.el .IP "\f(CW\-\-use\-colors\fR" 4
+.IP "\fB\-\-use\-colors\fR" 4
 .IX Item "--use-colors"
 .PD
 Use colors for lines of code that have zero coverage.  We use red color for
 non-exceptional lines and cyan for exceptional.  Same colors are used for
 basic blocks with \fB\-a\fR option.
-.ie n .IP """\-l""" 4
-.el .IP "\f(CW\-l\fR" 4
+.IP "\fB\-l\fR" 4
 .IX Item "-l"
 .PD 0
-.ie n .IP """\-\-long\-file\-names""" 4
-.el .IP "\f(CW\-\-long\-file\-names\fR" 4
+.IP "\fB\-\-long\-file\-names\fR" 4
 .IX Item "--long-file-names"
 .PD
 Create long file names for included source files.  For example, if the
@@ -433,34 +435,27 @@ produce an output file called \fIa.c##x.h.gcov\fR instead of
 multiple source files and you want to see the individual
 contributions.  If you use the \fB\-p\fR option, both the including
 and included file names will be complete path names.
-.ie n .IP """\-m""" 4
-.el .IP "\f(CW\-m\fR" 4
+.IP "\fB\-m\fR" 4
 .IX Item "-m"
 .PD 0
-.ie n .IP """\-\-demangled\-names""" 4
-.el .IP "\f(CW\-\-demangled\-names\fR" 4
+.IP "\fB\-\-demangled\-names\fR" 4
 .IX Item "--demangled-names"
 .PD
 Display demangled function names in output. The default is to show
 mangled function names.
-.ie n .IP """\-n""" 4
-.el .IP "\f(CW\-n\fR" 4
+.IP "\fB\-n\fR" 4
 .IX Item "-n"
 .PD 0
-.ie n .IP """\-\-no\-output""" 4
-.el .IP "\f(CW\-\-no\-output\fR" 4
+.IP "\fB\-\-no\-output\fR" 4
 .IX Item "--no-output"
 .PD
 Do not create the \fBgcov\fR output file.
-.ie n .IP """\-o \fIdirectory|file\fP""" 4
-.el .IP "\f(CW\-o \f(CIdirectory|file\f(CW\fR" 4
+.IP "\fB\-o\fR \fIdirectory|file\fR" 4
 .IX Item "-o directory|file"
 .PD 0
-.ie n .IP """\-\-object\-directory \fIdirectory\fP""" 4
-.el .IP "\f(CW\-\-object\-directory \f(CIdirectory\f(CW\fR" 4
+.IP "\fB\-\-object\-directory\fR \fIdirectory\fR" 4
 .IX Item "--object-directory directory"
-.ie n .IP """\-\-object\-file \fIfile\fP""" 4
-.el .IP "\f(CW\-\-object\-file \f(CIfile\f(CW\fR" 4
+.IP "\fB\-\-object\-file\fR \fIfile\fR" 4
 .IX Item "--object-file file"
 .PD
 Specify either the directory containing the gcov data files, or the
@@ -469,12 +464,10 @@ object path name.  The \fI.gcno\fR, and
 is specified, the data files are in that directory and named after the
 input file name, without its extension.  If a file is specified here,
 the data files are named after that file, without its extension.
-.ie n .IP """\-p""" 4
-.el .IP "\f(CW\-p\fR" 4
+.IP "\fB\-p\fR" 4
 .IX Item "-p"
 .PD 0
-.ie n .IP """\-\-preserve\-paths""" 4
-.el .IP "\f(CW\-\-preserve\-paths\fR" 4
+.IP "\fB\-\-preserve\-paths\fR" 4
 .IX Item "--preserve-paths"
 .PD
 Preserve complete path information in the names of generated
@@ -484,34 +477,28 @@ translated to \fB#\fR characters, \fI.\fR directory components
 removed and unremoveable \fI..\fR
 components renamed to \fB^\fR.  This is useful if sourcefiles are in several
 different directories.
-.ie n .IP """\-q""" 4
-.el .IP "\f(CW\-q\fR" 4
+.IP "\fB\-q\fR" 4
 .IX Item "-q"
 .PD 0
-.ie n .IP """\-\-use\-hotness\-colors""" 4
-.el .IP "\f(CW\-\-use\-hotness\-colors\fR" 4
+.IP "\fB\-\-use\-hotness\-colors\fR" 4
 .IX Item "--use-hotness-colors"
 .PD
 Emit perf-like colored output for hot lines.  Legend of the color scale
 is printed at the very beginning of the output file.
-.ie n .IP """\-r""" 4
-.el .IP "\f(CW\-r\fR" 4
+.IP "\fB\-r\fR" 4
 .IX Item "-r"
 .PD 0
-.ie n .IP """\-\-relative\-only""" 4
-.el .IP "\f(CW\-\-relative\-only\fR" 4
+.IP "\fB\-\-relative\-only\fR" 4
 .IX Item "--relative-only"
 .PD
 Only output information about source files with a relative pathname
 (after source prefix elision).  Absolute paths are usually system
 header files and coverage of any inline functions therein is normally
 uninteresting.
-.ie n .IP """\-s \fIdirectory\fP""" 4
-.el .IP "\f(CW\-s \f(CIdirectory\f(CW\fR" 4
+.IP "\fB\-s\fR \fIdirectory\fR" 4
 .IX Item "-s directory"
 .PD 0
-.ie n .IP """\-\-source\-prefix \fIdirectory\fP""" 4
-.el .IP "\f(CW\-\-source\-prefix \f(CIdirectory\f(CW\fR" 4
+.IP "\fB\-\-source\-prefix\fR \fIdirectory\fR" 4
 .IX Item "--source-prefix directory"
 .PD
 A prefix for source file names to remove when generating the output
@@ -519,50 +506,40 @@ coverage files.  This option is useful when building in a separate
 directory, and the pathname to the source directory is not wanted when
 determining the output file names.  Note that this prefix detection is
 applied before determining whether the source file is absolute.
-.ie n .IP """\-t""" 4
-.el .IP "\f(CW\-t\fR" 4
+.IP "\fB\-t\fR" 4
 .IX Item "-t"
 .PD 0
-.ie n .IP """\-\-stdout""" 4
-.el .IP "\f(CW\-\-stdout\fR" 4
+.IP "\fB\-\-stdout\fR" 4
 .IX Item "--stdout"
 .PD
 Output to standard output instead of output files.
-.ie n .IP """\-u""" 4
-.el .IP "\f(CW\-u\fR" 4
+.IP "\fB\-u\fR" 4
 .IX Item "-u"
 .PD 0
-.ie n .IP """\-\-unconditional\-branches""" 4
-.el .IP "\f(CW\-\-unconditional\-branches\fR" 4
+.IP "\fB\-\-unconditional\-branches\fR" 4
 .IX Item "--unconditional-branches"
 .PD
 When branch probabilities are given, include those of unconditional branches.
 Unconditional branches are normally not interesting.
-.ie n .IP """\-v""" 4
-.el .IP "\f(CW\-v\fR" 4
+.IP "\fB\-v\fR" 4
 .IX Item "-v"
 .PD 0
-.ie n .IP """\-\-version""" 4
-.el .IP "\f(CW\-\-version\fR" 4
+.IP "\fB\-\-version\fR" 4
 .IX Item "--version"
 .PD
 Display the \fBgcov\fR version number (on the standard output),
 and exit without doing any further processing.
-.ie n .IP """\-w""" 4
-.el .IP "\f(CW\-w\fR" 4
+.IP "\fB\-w\fR" 4
 .IX Item "-w"
 .PD 0
-.ie n .IP """\-\-verbose""" 4
-.el .IP "\f(CW\-\-verbose\fR" 4
+.IP "\fB\-\-verbose\fR" 4
 .IX Item "--verbose"
 .PD
 Print verbose informations related to basic blocks and arcs.
-.ie n .IP """\-x""" 4
-.el .IP "\f(CW\-x\fR" 4
+.IP "\fB\-x\fR" 4
 .IX Item "-x"
 .PD 0
-.ie n .IP """\-\-hash\-filenames""" 4
-.el .IP "\f(CW\-\-hash\-filenames\fR" 4
+.IP "\fB\-\-hash\-filenames\fR" 4
 .IX Item "--hash-filenames"
 .PD
 By default, gcov uses the full pathname of the source files to create

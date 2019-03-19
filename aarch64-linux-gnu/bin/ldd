@@ -24,9 +24,9 @@
 
 # We should be able to find the translation right at the beginning.
 TEXTDOMAIN=libc
-TEXTDOMAINDIR=/root/gcc/aarch64-linux-gnu/aarch64-linux-gnu/share/locale
+TEXTDOMAINDIR=/root/buildgcc/aarch64-linux-gnu/aarch64-linux-gnu/share/locale
 
-RTLDLIST=/root/gcc/aarch64-linux-gnu/aarch64-linux-gnu/lib/ld-linux-aarch64.so.1
+RTLDLIST=/root/buildgcc/aarch64-linux-gnu/aarch64-linux-gnu/lib/ld-linux-aarch64.so.1
 warn=
 bind_now=
 verbose=

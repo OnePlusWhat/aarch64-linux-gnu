@@ -35,7 +35,7 @@ REPORT_BUGS_TO="<http://www.gnu.org/software/libc/bugs.html>"
 
 # Specify default values for environment variables if they are unset.
 : ${AWK=awk}
-: ${TZDIR=/root/gcc/aarch64-linux-gnu/aarch64-linux-gnu/share/zoneinfo}
+: ${TZDIR=/root/buildgcc/aarch64-linux-gnu/aarch64-linux-gnu/share/zoneinfo}
 
 # Output one argument as-is to standard output.
 # Safer than 'echo', which can mishandle '\' or leading '-'.
